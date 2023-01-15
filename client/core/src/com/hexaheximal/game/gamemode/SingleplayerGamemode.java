@@ -69,6 +69,15 @@ public class SingleplayerGamemode extends Gamemode {
 		this.camera.setToOrtho(false, this.game.width, this.game.height);
 	}
 
+	public void reset() {
+		this.x = 0;
+		this.y = 0;
+			
+		this.xvelocity = 0;
+		this.yvelocity = 0;
+		this.rotation = 0;
+	}
+
 	public void update() {
 		if (acceleration == 0.0f) {
 			this.xvelocity *= 0.99;
@@ -99,12 +108,7 @@ public class SingleplayerGamemode extends Gamemode {
 		}
 		
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.R)) {
-			this.x = 0;
-			this.y = 0;
-			
-			this.xvelocity = 0;
-			this.yvelocity = 0;
-			this.rotation = 0;
+			this.reset();
 		}
 		
 		
@@ -165,11 +169,7 @@ public class SingleplayerGamemode extends Gamemode {
 		
 		batch.draw(new TextureRegion(this.playerTexture, 0, 0, 128, 128), this.x - 64, this.y - 64, 64, 64, 128, 128, 1f, 1f, -rotation);
 		
-		//batch.setProjectionMatrix(this.game.guiCamera.combined);
-		
-		//this.font.render(batch, 32, this.game.height - 32, this.game.deviceType + " (" + this.game.deviceName + ")", false);
-
-		System.out.println("x: " + Float.toString(x) + ", y: " + Float.toString(y));
+		//System.out.println("x: " + Float.toString(x) + ", y: " + Float.toString(y));
 	}
 
 	public void dispose() {
