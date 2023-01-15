@@ -58,7 +58,7 @@ public class SingleplayerGamemode extends Gamemode {
 		
 		this.random = new Random();
 		
-		for (int i = 0; i < 50000; i++) {
+		for (int i = 0; i < 10000; i++) {
 			int x = this.random.nextInt(this.worldSize * 2) - this.worldSize;
 			int y = this.random.nextInt(this.worldSize * 2) - this.worldSize;
 			
@@ -70,6 +70,11 @@ public class SingleplayerGamemode extends Gamemode {
 	}
 
 	public void update() {
+		if (acceleration == 0.0f) {
+			this.xvelocity *= 0.99;
+			this.yvelocity *= 0.99;
+		}
+
 		boolean available = Gdx.input.isPeripheralAvailable(Peripheral.Accelerometer);
 		
 		if (available) {
