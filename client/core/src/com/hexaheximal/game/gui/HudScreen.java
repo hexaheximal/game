@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.hexaheximal.game.Game;
 import com.hexaheximal.game.text.Font;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 
 public class HudScreen {
 	public Game game;
@@ -40,5 +41,27 @@ public class HudScreen {
 		this.pauseTexture.dispose();
 		this.forwardTexture.dispose();
 		this.backwardTexture.dispose();
+	}
+
+	public boolean handleTouchUp(int x, int y) {
+		this.game.gamemode.acceleration = 0.0f;
+		return false;
+	}
+
+	public boolean handleTouchDown(int x, int y) {
+		Rectangle forwardRect = new Rectangle(16, this.game.height - (128 + 16), 128, 128);
+		Rectangle backwardRect = new Rectangle(this.game.width - (128 + 16), this.game.height - (128 + 16), 128, 128);
+
+		if (forwardRect.contains(x, y)) {
+			this.game.gamemode.acceleration = 1.0f;
+			return true;
+		}
+
+		if (backwardRect.contains(x, y)) {
+			this.game.gamemode.acceleration = -1.0f;
+			return true;
+		}
+
+		return false;
 	}
 }

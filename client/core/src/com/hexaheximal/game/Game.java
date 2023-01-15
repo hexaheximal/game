@@ -80,19 +80,20 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 	
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		if (screenY > this.height / 2) {
-			this.gamemode.acceleration = -1.0f;
-		} else {
-			this.gamemode.acceleration = 1.0f;
+		if (this.hud != null) {
+			return this.hud.handleTouchDown(screenX, screenY);
 		}
 		
-		return true;
+		return false;
 	}
 	
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		this.gamemode.acceleration = 0.0f;
-		return true;
+		if (this.hud != null) {
+			return this.hud.handleTouchUp(screenX, screenY);
+		}
+
+		return false;
 	}
 	
 	@Override
@@ -101,21 +102,15 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		this.gamemode.dispose();
 	}
 	
-	@Override public boolean mouseMoved (int screenX, int screenY) {
+	@Override public boolean mouseMoved(int screenX, int screenY) {
 		return false;
 	}
 
-	@Override public boolean touchDragged (int screenX, int screenY, int pointer) {
-		if (screenY > this.height / 2) {
-			this.gamemode.acceleration = -1.0f;
-		} else {
-			this.gamemode.acceleration = 1.0f;
-		}
-		
-		return true;
+	@Override public boolean touchDragged(int screenX, int screenY, int pointer) {
+		return false;
 	}
 
-	@Override public void resize (int width, int height) {}
+	@Override public void resize(int width, int height) {}
 
 	@Override
 	public boolean keyDown(int keycode) {
