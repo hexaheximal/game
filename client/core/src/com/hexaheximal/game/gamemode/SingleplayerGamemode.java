@@ -91,12 +91,14 @@ public class SingleplayerGamemode extends Gamemode {
 			this.rotation += yRot;
 		}
 		
-		if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) {
-			acceleration = 1.0f;
-		} else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) {
-			acceleration = -1.0f;
-		} else if (this.game.deviceType != "Android") {
-			acceleration = 0.0f;
+		if (!this.game.isMobile) {
+			if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) {
+				acceleration = 1.0f;
+			} else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) {
+				acceleration = -1.0f;
+			} else {
+				acceleration = 0.0f;
+			}
 		}
 		
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
