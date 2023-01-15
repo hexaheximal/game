@@ -34,15 +34,20 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 	public HudScreen hud;
 
 	public Music music;
+
+	public boolean isMobile;
 	
-	public Game(String deviceType, String deviceName) {
+	public Game(String deviceType, String deviceName, boolean isMobile) {
 		this.deviceType = deviceType;
 		this.deviceName = deviceName;
+		this.isMobile = isMobile;
 	}
 	
 	public float acceleration;
 
 	public SingleplayerGamemode gamemode;
+
+	public boolean showSmallerImages;
 	
 	@Override
 	public void create() {
@@ -50,6 +55,12 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		
 		this.width = Gdx.graphics.getWidth();
 		this.height = Gdx.graphics.getHeight();
+
+		if (1920 > this.width && 1080 > this.height) {
+			this.showSmallerImages = true;
+		} else {
+			this.showSmallerImages = false;
+		}
 		
 		this.guiCamera = new OrthographicCamera();
 		this.guiCamera.setToOrtho(false, this.width, this.height);
@@ -77,7 +88,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		
 		this.gamemode.render(this.batch);
 		
-		if (this.hud != null && this.deviceType == "Android") {
+		if (this.hud != null && isMobile) {
 			this.hud.render(this.batch);
 		}
 		

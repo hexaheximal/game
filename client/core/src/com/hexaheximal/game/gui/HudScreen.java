@@ -19,10 +19,10 @@ public class HudScreen {
 		this.game = game;
 		this.font = new Font("Roboto-Regular.ttf", 64);
 
-		this.pauseTexture = new Texture("pause.png");
-		this.resetTexture = new Texture("reset.png");
-		this.forwardTexture = new Texture("forward.png");
-		this.backwardTexture = new Texture("backward.png");
+		this.pauseTexture = new Texture(this.game.showSmallerImages ? "pause_small.png" : "pause.png");
+		this.resetTexture = new Texture(this.game.showSmallerImages ? "reset_small.png" : "reset.png");
+		this.forwardTexture = new Texture(this.game.showSmallerImages ? "forward_small.png" : "forward.png");
+		this.backwardTexture = new Texture(this.game.showSmallerImages ? "backward_small.png" : "backward.png");
 	}
 
 	public void render(SpriteBatch batch) {
@@ -34,10 +34,10 @@ public class HudScreen {
 
 		//this.font.render(batch, this.game.width / 2, this.game.height / 2, "Hello, World!", true);
 
-		batch.draw(this.pauseTexture, 16, this.game.height - (128 + 16));
-		batch.draw(this.resetTexture, 16 + 128 + 16, this.game.height - (128 + 16));
+		batch.draw(this.pauseTexture, 16, this.game.height - (this.pauseTexture.getHeight() + 16));
+		batch.draw(this.resetTexture, 16 + this.pauseTexture.getWidth() + 16, this.game.height - (this.resetTexture.getHeight() + 16));
 		batch.draw(this.forwardTexture, 16, 16);
-		batch.draw(this.backwardTexture, this.game.width - (256 + 16), 16);
+		batch.draw(this.backwardTexture, this.game.width - (this.backwardTexture.getHeight() + 16), 16);
 	}
 
 	public void dispose() {

@@ -46,7 +46,7 @@ public class SingleplayerGamemode extends Gamemode {
 	public SingleplayerGamemode(Game game) {
 		super(game);
 
-		this.playerTexture = new Texture("test.png");
+		this.playerTexture = new Texture(this.game.showSmallerImages ? "spaceship_small.png" : "spaceship.png");
 		this.starTexture = new Texture("star.png");
 		
 		this.x = 0;
@@ -125,8 +125,8 @@ public class SingleplayerGamemode extends Gamemode {
 			this.xvelocity = 8.0f;
 		}
 		
-		if (this.x > this.worldSize - 128) {
-			this.x = this.worldSize - 128;
+		if (this.x > this.worldSize - this.playerTexture.getWidth()) {
+			this.x = this.worldSize - this.playerTexture.getWidth();
 			this.xvelocity = -8.0f;
 		}
 		
@@ -135,8 +135,8 @@ public class SingleplayerGamemode extends Gamemode {
 			this.yvelocity = 8.0f;
 		}
 		
-		if (this.y > this.worldSize - 128) {
-			this.y = this.worldSize - 128;
+		if (this.y > this.worldSize - this.playerTexture.getHeight()) {
+			this.y = this.worldSize - this.playerTexture.getHeight();
 			this.yvelocity = -8.0f;
 		}
 		
@@ -167,8 +167,8 @@ public class SingleplayerGamemode extends Gamemode {
 			batch.draw(this.starTexture, starPosition.x, starPosition.y);
 		}
 		
-		batch.draw(new TextureRegion(this.playerTexture, 0, 0, 128, 128), this.x - 64, this.y - 64, 64, 64, 128, 128, 1f, 1f, -rotation);
-		
+		batch.draw(new TextureRegion(this.playerTexture, 0, 0, this.playerTexture.getWidth(), this.playerTexture.getHeight()), this.x - (this.playerTexture.getWidth() / 2), this.y - (this.playerTexture.getHeight() / 2), (this.playerTexture.getWidth() / 2), (this.playerTexture.getHeight() / 2), this.playerTexture.getWidth(), this.playerTexture.getHeight(), 1f, 1f, -rotation);
+
 		//System.out.println("x: " + Float.toString(x) + ", y: " + Float.toString(y));
 	}
 

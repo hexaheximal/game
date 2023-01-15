@@ -13,6 +13,6 @@ public class DesktopLauncher {
 		config.setTitle("Game");
 		config.setWindowedMode(1920, 1080);
 		config.useVsync(true);
-		new Lwjgl3Application(new Game(System.getProperty("os.name"), "Unknown"), config);
+		new Lwjgl3Application(new Game(System.getProperty("os.name"), "Unknown", false), config);
 	}
 }
