@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.Input.Peripheral;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.InputProcessor;
+import com.hexaheximal.game.gui.HudScreen;
 import com.hexaheximal.game.Game;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Gdx;
@@ -155,9 +156,9 @@ public class SingleplayerGamemode extends Gamemode {
 		
 		batch.draw(new TextureRegion(this.playerTexture, 0, 0, 128, 128), this.x - 64, this.y - 64, 64, 64, 128, 128, 1f, 1f, -rotation);
 		
-		batch.setProjectionMatrix(this.game.guiCamera.combined);
+		//batch.setProjectionMatrix(this.game.guiCamera.combined);
 		
-		this.font.render(batch, 32, this.game.height - 32, this.game.deviceType + " (" + this.game.deviceName + ")", false);
+		//this.font.render(batch, 32, this.game.height - 32, this.game.deviceType + " (" + this.game.deviceName + ")", false);
 	}
 
 	public void dispose() {

@@ -1,6 +1,7 @@
 package com.hexaheximal.game.gamemode;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.hexaheximal.game.gui.GuiScreen;
 import com.hexaheximal.game.Game;
 
 public class Gamemode {

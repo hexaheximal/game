@@ -1,5 +1,7 @@
 package com.hexaheximal.game;
 
+import com.hexaheximal.game.gui.HudScreen;
+import com.hexaheximal.game.gui.GuiScreen;
 import com.hexaheximal.game.gamemode.Gamemode;
 import com.hexaheximal.game.gamemode.SingleplayerGamemode;
 import com.hexaheximal.game.text.Font;
@@ -28,6 +30,8 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 	
 	public String deviceType;
 	public String deviceName;
+
+	public HudScreen hud;
 	
 	public Game(String deviceType, String deviceName) {
 		this.deviceType = deviceType;
@@ -51,12 +55,14 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		this.batch = new SpriteBatch();
 
 		this.gamemode = new SingleplayerGamemode(this);
+		this.hud = new HudScreen(this);
 		
 		Gdx.input.setInputProcessor(this);
 	}
 
 	@Override
 	public void render() {
+		this.guiCamera.update();
 		this.gamemode.update();
 
 		ScreenUtils.clear(0, 0, 0, 1);
@@ -64,6 +70,10 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		this.batch.begin();
 		
 		this.gamemode.render(this.batch);
+		
+		if (this.hud != null) {
+			this.hud.render(this.batch);
+		}
 		
 		this.batch.end();
 	}
