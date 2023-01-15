@@ -53,9 +53,9 @@ public class HudScreen {
 	}
 
 	public boolean handleTouchDown(int x, int y) {
-		Rectangle resetRect = new Rectangle(16 + 128 + 16, 16, 128, 128);
-		Rectangle forwardRect = new Rectangle(16, this.game.height - (256 + 16), 256, 256);
-		Rectangle backwardRect = new Rectangle(this.game.width - (256 + 16), this.game.height - (256 + 16), 256, 256);
+		Rectangle resetRect = new Rectangle(16 + this.resetTexture.getWidth() + 16, 16, this.resetTexture.getWidth(), this.resetTexture.getHeight());
+		Rectangle forwardRect = new Rectangle(16, this.game.height - (this.forwardTexture.getHeight() + 16), this.forwardTexture.getWidth(), this.forwardTexture.getHeight());
+		Rectangle backwardRect = new Rectangle(this.game.width - (this.backwardTexture.getWidth() + 16), this.game.height - (this.backwardTexture.getHeight() + 16), this.backwardTexture.getWidth(), this.backwardTexture.getHeight());
 
 		if (resetRect.contains(x, y)) {
 			this.game.gamemode.reset();
