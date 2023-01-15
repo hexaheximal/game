@@ -1,4 +1,4 @@
-package com.hexaheximal.game;
+package com.hexaheximal.game.text;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
