@@ -34,7 +34,7 @@ public class HudScreen {
 
 		batch.draw(this.pauseTexture, 16, this.game.height - (128 + 16));
 		batch.draw(this.forwardTexture, 16, 16);
-		batch.draw(this.backwardTexture, this.game.width - (128 + 16), 16);
+		batch.draw(this.backwardTexture, this.game.width - (256 + 16), 16);
 	}
 
 	public void dispose() {
@@ -49,8 +49,8 @@ public class HudScreen {
 	}
 
 	public boolean handleTouchDown(int x, int y) {
-		Rectangle forwardRect = new Rectangle(16, this.game.height - (128 + 16), 128, 128);
-		Rectangle backwardRect = new Rectangle(this.game.width - (128 + 16), this.game.height - (128 + 16), 128, 128);
+		Rectangle forwardRect = new Rectangle(16, this.game.height - (256 + 16), 256, 256);
+		Rectangle backwardRect = new Rectangle(this.game.width - (256 + 16), this.game.height - (256 + 16), 256, 256);
 
 		if (forwardRect.contains(x, y)) {
 			this.game.gamemode.acceleration = 1.0f;
