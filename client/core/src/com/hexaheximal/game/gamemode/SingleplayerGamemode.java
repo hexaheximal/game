@@ -69,7 +69,7 @@ public class SingleplayerGamemode extends Gamemode {
 		boolean available = Gdx.input.isPeripheralAvailable(Peripheral.Accelerometer);
 		
 		if (available) {
-			float yRot = Gdx.input.getAccelerometerY() * 1.5f;
+			float yRot = Gdx.input.getAccelerometerY();
 			this.rotation += yRot;
 		}
 		

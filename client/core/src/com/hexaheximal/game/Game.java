@@ -32,6 +32,8 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 	public String deviceName;
 
 	public HudScreen hud;
+
+	public Music music;
 	
 	public Game(String deviceType, String deviceName) {
 		this.deviceType = deviceType;
@@ -56,7 +58,11 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
 		this.gamemode = new SingleplayerGamemode(this);
 		this.hud = new HudScreen(this);
-		
+
+		this.music = Gdx.audio.newMusic(Gdx.files.internal("music.ogg"));
+		this.music.setLooping(true);
+		this.music.play();
+
 		Gdx.input.setInputProcessor(this);
 	}
 
