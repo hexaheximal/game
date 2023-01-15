@@ -40,6 +40,8 @@ public class SingleplayerGamemode extends Gamemode {
 	public OrthographicCamera camera;
 	
 	public List<Vector2> starPositions = new ArrayList<>();
+
+	public int worldSize;
 	
 	public SingleplayerGamemode(Game game) {
 		super(game);
@@ -47,16 +49,18 @@ public class SingleplayerGamemode extends Gamemode {
 		this.playerTexture = new Texture("test.png");
 		this.starTexture = new Texture("star.png");
 		
-		this.x = (this.game.width / 2.0f) - 64;
-		this.y = (this.game.height / 2.0f) - 64;
+		this.x = 0;
+		this.y = 0;
+
+		this.worldSize = 10000;
 		
 		this.font = new Font("Roboto-Regular.ttf", 64);
 		
 		this.random = new Random();
 		
-		for (int i = 0; i < 1000; i++) {
-			int x = this.random.nextInt(this.game.width * 4) - this.game.width;
-			int y = this.random.nextInt(this.game.height * 4) - this.game.width;
+		for (int i = 0; i < 50000; i++) {
+			int x = this.random.nextInt(this.worldSize * 2) - this.worldSize;
+			int y = this.random.nextInt(this.worldSize * 2) - this.worldSize;
 			
 			this.starPositions.add(new Vector2(x, y));
 		}
@@ -90,8 +94,8 @@ public class SingleplayerGamemode extends Gamemode {
 		}
 		
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.R)) {
-			this.x = (this.game.width / 2.0f) - 64;
-			this.y = (this.game.height / 2.0f) - 64;
+			this.x = 0;
+			this.y = 0;
 			
 			this.xvelocity = 0;
 			this.yvelocity = 0;
@@ -107,23 +111,23 @@ public class SingleplayerGamemode extends Gamemode {
 		this.x += this.xvelocity;
 		this.y += this.yvelocity;
 		
-		if (0 > this.x) {
-			this.x = 0;
+		if (-this.worldSize > this.x) {
+			this.x = -this.worldSize;
 			this.xvelocity = 8.0f;
 		}
 		
-		if (this.x > this.game.width - 128) {
-			this.x = this.game.width - 128;
+		if (this.x > this.worldSize - 128) {
+			this.x = this.worldSize - 128;
 			this.xvelocity = -8.0f;
 		}
 		
-		if (0 > this.y) {
-			this.y = 0;
+		if (-this.worldSize > this.y) {
+			this.y = -this.worldSize;
 			this.yvelocity = 8.0f;
 		}
 		
-		if (this.y > this.game.height - 128) {
-			this.y = this.game.height - 128;
+		if (this.y > this.worldSize - 128) {
+			this.y = this.worldSize - 128;
 			this.yvelocity = -8.0f;
 		}
 		
@@ -159,6 +163,8 @@ public class SingleplayerGamemode extends Gamemode {
 		//batch.setProjectionMatrix(this.game.guiCamera.combined);
 		
 		//this.font.render(batch, 32, this.game.height - 32, this.game.deviceType + " (" + this.game.deviceName + ")", false);
+
+		System.out.println("x: " + Float.toString(x) + ", y: " + Float.toString(y));
 	}
 
 	public void dispose() {
