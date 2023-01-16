@@ -12,6 +12,7 @@ public class Laser {
 	public int counter;
 	public float direction;
 	public Texture laserTexture;
+	public TextureRegion region;
 	
 	public Laser(Game game, float x, float y, float direction, Texture laserTexture) {
 		this.game = game;
@@ -20,6 +21,7 @@ public class Laser {
 		this.direction = direction;
 		this.counter = 0;
 		this.laserTexture = laserTexture;
+		this.region = new TextureRegion(this.laserTexture, 0, 0, this.laserTexture.getWidth(), this.laserTexture.getHeight());
 	}
 
 	public void update() {
@@ -32,7 +34,6 @@ public class Laser {
 	}
 
 	public void render(SpriteBatch batch) {
-		TextureRegion region = new TextureRegion(this.laserTexture, 0, 0, this.laserTexture.getWidth(), this.laserTexture.getHeight());
-		batch.draw(region, this.x - (this.laserTexture.getWidth() / 2), this.y - (this.laserTexture.getHeight() / 2), (this.laserTexture.getWidth() / 2), (this.laserTexture.getHeight() / 2), this.laserTexture.getWidth(), this.laserTexture.getHeight(), 1f, 1f, -this.direction);
+		batch.draw(this.region, this.x - (this.laserTexture.getWidth() / 2), this.y - (this.laserTexture.getHeight() / 2), (this.laserTexture.getWidth() / 2), (this.laserTexture.getHeight() / 2), this.laserTexture.getWidth(), this.laserTexture.getHeight(), 1f, 1f, -this.direction);
 	}
 }

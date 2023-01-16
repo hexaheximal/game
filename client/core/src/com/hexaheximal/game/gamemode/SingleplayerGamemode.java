@@ -25,6 +25,8 @@ public class SingleplayerGamemode extends Gamemode {
 	public Texture starTexture;
 	public Texture laserTexture;
 	
+	public TextureRegion region;
+
 	float x;
 	float y;
 	
@@ -58,6 +60,8 @@ public class SingleplayerGamemode extends Gamemode {
 		this.playerTexture = new Texture("spaceship.png");
 		this.starTexture = new Texture("star.png");
 		this.laserTexture = new Texture("laser.png");
+
+		this.region = new TextureRegion(this.playerTexture, 0, 0, this.playerTexture.getWidth(), this.playerTexture.getHeight());
 
 		this.laserSound = Gdx.audio.newSound(Gdx.files.internal("laser.wav"));
 
@@ -226,7 +230,7 @@ public class SingleplayerGamemode extends Gamemode {
 			laser.render(batch);
 		}
 		
-		batch.draw(new TextureRegion(this.playerTexture, 0, 0, this.playerTexture.getWidth(), this.playerTexture.getHeight()), this.x - (this.playerTexture.getWidth() / 2), this.y - (this.playerTexture.getHeight() / 2), (this.playerTexture.getWidth() / 2), (this.playerTexture.getHeight() / 2), this.playerTexture.getWidth(), this.playerTexture.getHeight(), 1f, 1f, -this.rotation);
+		batch.draw(this.region, this.x - (this.playerTexture.getWidth() / 2), this.y - (this.playerTexture.getHeight() / 2), (this.playerTexture.getWidth() / 2), (this.playerTexture.getHeight() / 2), this.playerTexture.getWidth(), this.playerTexture.getHeight(), 1f, 1f, -this.rotation);
 	}
 
 	public void dispose() {
