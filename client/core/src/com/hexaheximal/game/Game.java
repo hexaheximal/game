@@ -117,6 +117,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 	public void dispose() {
 		this.batch.dispose();
 		this.gamemode.dispose();
+		this.music.dispose();
 	}
 	
 	@Override public boolean mouseMoved(int screenX, int screenY) {

@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.InputProcessor;
 import com.hexaheximal.game.gui.HudScreen;
 import com.hexaheximal.game.Game;
+import com.hexaheximal.game.Laser;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Gdx;
 import java.util.*;
@@ -22,6 +23,7 @@ import java.util.*;
 public class SingleplayerGamemode extends Gamemode {
 	public Texture playerTexture;
 	public Texture starTexture;
+	public Texture laserTexture;
 	
 	float x;
 	float y;
@@ -40,15 +42,25 @@ public class SingleplayerGamemode extends Gamemode {
 	public OrthographicCamera camera;
 	
 	public List<Vector2> starPositions = new ArrayList<>();
+	public List<Laser> lasers = new ArrayList<>();
 
 	public int worldSize;
+
+	public Sound laserSound;
+
+	public int laserCooldown;
+
+	public boolean fireLaser;
 	
 	public SingleplayerGamemode(Game game) {
 		super(game);
 
 		this.playerTexture = new Texture("spaceship.png");
 		this.starTexture = new Texture("star.png");
-		
+		this.laserTexture = new Texture("laser.png");
+
+		this.laserSound = Gdx.audio.newSound(Gdx.files.internal("laser.wav"));
+
 		this.x = 0;
 		this.y = 0;
 
@@ -112,9 +124,36 @@ public class SingleplayerGamemode extends Gamemode {
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.R)) {
 			this.reset();
 		}
+
+		if (!this.game.isMobile) {
+			if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+				fireLaser = true;
+			} else {
+				fireLaser = false;
+			}
+		}
+
+		if (fireLaser) {
+			if (this.laserCooldown != 0) {
+				this.laserCooldown--;
+			} else {
+				this.laserCooldown = 8;
+				this.laserSound.play(0.1f);
+
+				double radians = Math.toRadians(this.rotation);
+			
+				float laserX = this.x;
+				float laserY = this.y;
+
+				laserX += Math.sin(radians) * 128.0f;
+				laserY += Math.cos(radians) * 128.0f;
+
+				this.lasers.add(new Laser(this.game, laserX, laserY, this.rotation, this.laserTexture));
+			}
+		}
 		
 		
-		double radians = Math.toRadians(rotation);
+		double radians = Math.toRadians(this.rotation);
 			
 		this.xvelocity += Math.sin(radians) * this.acceleration;
 		this.yvelocity += Math.cos(radians) * this.acceleration;
@@ -157,6 +196,20 @@ public class SingleplayerGamemode extends Gamemode {
 		if (-32 > this.yvelocity) {
 			this.yvelocity = -32;
 		}
+
+		List<Laser> laserDeleteQueue = new ArrayList<>();
+
+		for (Laser laser:lasers) {
+			laser.update();
+
+			if (laser.counter > 100) {
+				laserDeleteQueue.add(laser);
+			}
+		}
+
+		for (Laser laser:laserDeleteQueue) {
+			lasers.remove(laser);
+		}
 	}
 
 	public void render(SpriteBatch batch) {
@@ -168,14 +221,18 @@ public class SingleplayerGamemode extends Gamemode {
 		for (Vector2 starPosition:starPositions) {
 			batch.draw(this.starTexture, starPosition.x, starPosition.y);
 		}
-		
-		batch.draw(new TextureRegion(this.playerTexture, 0, 0, this.playerTexture.getWidth(), this.playerTexture.getHeight()), this.x - (this.playerTexture.getWidth() / 2), this.y - (this.playerTexture.getHeight() / 2), (this.playerTexture.getWidth() / 2), (this.playerTexture.getHeight() / 2), this.playerTexture.getWidth(), this.playerTexture.getHeight(), 1f, 1f, -rotation);
 
-		//System.out.println("x: " + Float.toString(x) + ", y: " + Float.toString(y));
+		for (Laser laser:lasers) {
+			laser.render(batch);
+		}
+		
+		batch.draw(new TextureRegion(this.playerTexture, 0, 0, this.playerTexture.getWidth(), this.playerTexture.getHeight()), this.x - (this.playerTexture.getWidth() / 2), this.y - (this.playerTexture.getHeight() / 2), (this.playerTexture.getWidth() / 2), (this.playerTexture.getHeight() / 2), this.playerTexture.getWidth(), this.playerTexture.getHeight(), 1f, 1f, -this.rotation);
 	}
 
 	public void dispose() {
 		this.playerTexture.dispose();
 		this.starTexture.dispose();
+		this.laserTexture.dispose();
+		this.laserSound.dispose();
 	}
 }

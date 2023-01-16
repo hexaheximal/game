@@ -17,7 +17,7 @@ public class HudScreen {
 
 	public HudScreen(Game game) {
 		this.game = game;
-		this.font = new Font("Roboto-Regular.ttf", 64);
+		//this.font = new Font("Roboto-Regular.ttf", 64);
 
 		this.pauseTexture = new Texture(this.game.showSmallerImages ? "pause_small.png" : "pause.png");
 		this.resetTexture = new Texture(this.game.showSmallerImages ? "reset_small.png" : "reset.png");
@@ -48,14 +48,30 @@ public class HudScreen {
 	}
 
 	public boolean handleTouchUp(int x, int y) {
-		this.game.gamemode.acceleration = 0.0f;
-		return false;
+		Rectangle pauseRect = new Rectangle(16, 16, this.resetTexture.getWidth(), this.resetTexture.getHeight());
+		Rectangle resetRect = new Rectangle(16 + this.pauseTexture.getWidth() + 16, 16, this.resetTexture.getWidth(), this.resetTexture.getHeight());
+		Rectangle forwardRect = new Rectangle(16, this.game.height - (this.forwardTexture.getHeight() + 16), this.forwardTexture.getWidth(), this.forwardTexture.getHeight());
+		Rectangle backwardRect = new Rectangle(this.game.width - (this.backwardTexture.getWidth() + 16), this.game.height - (this.backwardTexture.getHeight() + 16), this.backwardTexture.getWidth(), this.backwardTexture.getHeight());
+
+		if (forwardRect.contains(x, y) || backwardRect.contains(x, y)) {
+			this.game.gamemode.acceleration = 0.0f;
+			return true;
+		}
+
+		this.game.gamemode.fireLaser = false;
+
+		return true;
 	}
 
 	public boolean handleTouchDown(int x, int y) {
-		Rectangle resetRect = new Rectangle(16 + this.resetTexture.getWidth() + 16, 16, this.resetTexture.getWidth(), this.resetTexture.getHeight());
+		Rectangle pauseRect = new Rectangle(16, 16, this.resetTexture.getWidth(), this.resetTexture.getHeight());
+		Rectangle resetRect = new Rectangle(16 + this.pauseTexture.getWidth() + 16, 16, this.resetTexture.getWidth(), this.resetTexture.getHeight());
 		Rectangle forwardRect = new Rectangle(16, this.game.height - (this.forwardTexture.getHeight() + 16), this.forwardTexture.getWidth(), this.forwardTexture.getHeight());
 		Rectangle backwardRect = new Rectangle(this.game.width - (this.backwardTexture.getWidth() + 16), this.game.height - (this.backwardTexture.getHeight() + 16), this.backwardTexture.getWidth(), this.backwardTexture.getHeight());
+
+		if (pauseRect.contains(x, y)) {
+			return true;
+		}
 
 		if (resetRect.contains(x, y)) {
 			this.game.gamemode.reset();
@@ -72,6 +88,8 @@ public class HudScreen {
 			return true;
 		}
 
-		return false;
+		this.game.gamemode.fireLaser = true;
+
+		return true;
 	}
 }
