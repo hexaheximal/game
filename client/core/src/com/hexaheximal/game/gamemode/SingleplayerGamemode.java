@@ -46,7 +46,7 @@ public class SingleplayerGamemode extends Gamemode {
 	public SingleplayerGamemode(Game game) {
 		super(game);
 
-		this.playerTexture = new Texture(this.game.showSmallerImages ? "spaceship_small.png" : "spaceship.png");
+		this.playerTexture = new Texture("spaceship.png");
 		this.starTexture = new Texture("star.png");
 		
 		this.x = 0;
