@@ -70,13 +70,17 @@ public class SingleplayerGamemode extends Gamemode {
 
 		this.worldSize = 10000;
 		
-		this.font = new Font("Roboto-Regular.ttf", 64);
+		this.font = new Font("Roboto-Regular.ttf", 50);
 		
 		this.random = new Random();
 		
 		for (int i = 0; i < 10000; i++) {
 			int x = this.random.nextInt(this.worldSize * 2) - this.worldSize;
 			int y = this.random.nextInt(this.worldSize * 2) - this.worldSize;
+
+			if (800 > Math.sqrt((y - this.y) * (y - this.y) + (x - this.x) * (x - this.x))) {
+				continue;
+			}
 			
 			this.starPositions.add(new Vector2(x, y));
 		}
@@ -225,11 +229,25 @@ public class SingleplayerGamemode extends Gamemode {
 		for (Vector2 starPosition:starPositions) {
 			batch.draw(this.starTexture, starPosition.x, starPosition.y);
 		}
+		
+		this.font.render(batch, 0, 512, "Welcome!", true);
+
+		if (this.game.isMobile) {
+			this.font.render(batch, 0, 512 - 60, "Tilt your device to rotate your spaceship,", true);
+			this.font.render(batch, 0, 512 - 60 - 60, "And use the buttons at the bottom to accelerate!", true);
+			this.font.render(batch, 0, 512 - 60 - 60 - 60, "You also have a laser - Tap the screen to fire it!", true);
+			this.font.render(batch, 0, 512 - 60 - 60 - 60 - 60, "If you get lost, press the RESET button to respawn!", true);
+		} else {
+			this.font.render(batch, 0, 512 - 60, "Use A and D to rotate your spaceship,", true);
+			this.font.render(batch, 0, 512 - 60 - 60, "And use W and S to accelerate!", true);
+			this.font.render(batch, 0, 512 - 60 - 60 - 60, "You also have a laser - Press SPACE to fire it!", true);
+			this.font.render(batch, 0, 512 - 60 - 60 - 60 - 60, "If you get lost, press R to respawn!", true);
+		}
 
 		for (Laser laser:lasers) {
 			laser.render(batch);
 		}
-		
+
 		batch.draw(this.region, this.x - (this.playerTexture.getWidth() / 2), this.y - (this.playerTexture.getHeight() / 2), (this.playerTexture.getWidth() / 2), (this.playerTexture.getHeight() / 2), this.playerTexture.getWidth(), this.playerTexture.getHeight(), 1f, 1f, -this.rotation);
 	}
 
