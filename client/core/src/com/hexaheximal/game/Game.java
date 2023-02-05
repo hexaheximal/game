@@ -2,6 +2,7 @@ package com.hexaheximal.game;
 
 import com.hexaheximal.game.gui.HudScreen;
 import com.hexaheximal.game.gui.GuiScreen;
+import com.hexaheximal.game.gui.MainMenuScreen;
 import com.hexaheximal.game.gamemode.Gamemode;
 import com.hexaheximal.game.gamemode.SingleplayerGamemode;
 import com.hexaheximal.game.text.Font;
@@ -31,7 +32,10 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 	public String deviceType;
 	public String deviceName;
 
+	public GuiScreen gui;
 	public HudScreen hud;
+	
+	public boolean hideGUI;
 
 	public Music music;
 
@@ -69,6 +73,8 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
 		this.gamemode = new SingleplayerGamemode(this);
 		this.hud = new HudScreen(this);
+		
+		this.gui = new MainMenuScreen(this);
 
 		this.music = Gdx.audio.newMusic(Gdx.files.internal("music.ogg"));
 		this.music.setLooping(true);
@@ -79,12 +85,23 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 
 	@Override
 	public void render() {
-		this.guiCamera.update();
-		this.gamemode.update();
-
 		ScreenUtils.clear(0, 0, 0, 1);
 		
 		this.batch.begin();
+		
+		this.guiCamera.update();
+		
+		if (this.hideGUI) {
+			this.gui = null;
+		}
+		
+		if (this.gui != null) {
+			this.gui.render(this.batch);
+			this.batch.end();
+			return;
+		}
+		
+		this.gamemode.update();
 		
 		this.gamemode.render(this.batch);
 		
