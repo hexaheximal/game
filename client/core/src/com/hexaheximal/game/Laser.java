@@ -27,8 +27,8 @@ public class Laser {
 	public void update() {
 		double radians = Math.toRadians(this.direction);
 			
-		this.x += Math.sin(radians) * 16.0f;
-		this.y += Math.cos(radians) * 16.0f;
+		this.x += Math.sin(radians) * 64.0f;
+		this.y += Math.cos(radians) * 64.0f;
 
 		this.counter++;
 	}

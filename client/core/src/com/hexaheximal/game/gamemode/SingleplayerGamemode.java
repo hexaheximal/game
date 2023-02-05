@@ -145,8 +145,8 @@ public class SingleplayerGamemode extends Gamemode {
 			if (this.laserCooldown != 0) {
 				this.laserCooldown--;
 			} else {
-				this.laserCooldown = 8;
-				this.laserSound.play(0.1f);
+				this.laserCooldown = 4;
+				this.laserSound.play(0.5f);
 
 				double radians = Math.toRadians(this.rotation);
 			

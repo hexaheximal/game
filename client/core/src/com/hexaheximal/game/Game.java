@@ -74,7 +74,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		this.gamemode = new SingleplayerGamemode(this);
 		this.hud = new HudScreen(this);
 		
-		this.gui = new MainMenuScreen(this);
+		this.gui = null;//new MainMenuScreen(this);
 
 		this.music = Gdx.audio.newMusic(Gdx.files.internal("music.ogg"));
 		this.music.setLooping(true);
