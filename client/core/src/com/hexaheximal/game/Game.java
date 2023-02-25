@@ -59,12 +59,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		
 		this.width = Gdx.graphics.getWidth();
 		this.height = Gdx.graphics.getHeight();
-
-		if (1920 > this.width && 1080 > this.height) {
-			this.showSmallerImages = true;
-		} else {
-			this.showSmallerImages = false;
-		}
 		
 		this.guiCamera = new OrthographicCamera();
 		this.guiCamera.setToOrtho(false, this.width, this.height);
