@@ -119,21 +119,19 @@ public class SingleplayerGamemode extends Gamemode {
 			} else {
 				acceleration = 0.0f;
 			}
-		}
 		
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
 			this.rotation -= 1.0f;
 		}
 		
-		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) {
-			this.rotation += 1.0f;
-		}
-		
-		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.R)) {
-			this.reset();
-		}
+			if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) {
+				this.rotation += 1.0f;
+			}
+			
+			if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.R)) {
+				this.reset();
+			}
 
-		if (!this.game.isMobile) {
 			if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
 				fireLaser = true;
 			} else {
