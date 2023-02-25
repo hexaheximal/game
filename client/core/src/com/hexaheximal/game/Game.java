@@ -50,8 +50,6 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 	public float acceleration;
 
 	public SingleplayerGamemode gamemode;
-
-	public boolean showSmallerImages;
 	
 	@Override
 	public void create() {

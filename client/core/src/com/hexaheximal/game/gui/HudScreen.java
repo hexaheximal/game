@@ -19,10 +19,10 @@ public class HudScreen {
 		this.game = game;
 		//this.font = new Font("Roboto-Regular.ttf", 64);
 
-		this.pauseTexture = new Texture(this.game.showSmallerImages ? "pause_small.png" : "pause.png");
-		this.resetTexture = new Texture(this.game.showSmallerImages ? "reset_small.png" : "reset.png");
-		this.forwardTexture = new Texture(this.game.showSmallerImages ? "forward_small.png" : "forward.png");
-		this.backwardTexture = new Texture(this.game.showSmallerImages ? "backward_small.png" : "backward.png");
+		this.pauseTexture = new Texture("pause.png");
+		this.resetTexture = new Texture("reset.png");
+		this.forwardTexture = new Texture("forward.png");
+		this.backwardTexture = new Texture("backward.png");
 	}
 
 	public void render(SpriteBatch batch) {
