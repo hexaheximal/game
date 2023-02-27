@@ -1,11 +1,12 @@
-package com.hexaheximal.game;
+package com.hexaheximal.game.entity;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.hexaheximal.game.Game;
 import java.util.*;
 
-public class Laser {
+public class Laser extends Entity {
 	public Game game;
 	public float x;
 	public float y;
