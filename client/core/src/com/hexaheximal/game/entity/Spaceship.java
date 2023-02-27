@@ -39,6 +39,22 @@ public class Spaceship {
 			
 		this.xvelocity += Math.sin(radians) * this.acceleration;
 		this.yvelocity += Math.cos(radians) * this.acceleration;
+
+		if (this.spaceship.xvelocity > 32) {
+			this.spaceship.xvelocity = 32;
+		}
+		
+		if (-32 > this.spaceship.xvelocity) {
+			this.spaceship.xvelocity = -32;
+		}
+		
+		if (this.spaceship.yvelocity > 32) {
+			this.spaceship.yvelocity = 32;
+		}
+		
+		if (-32 > this.spaceship.yvelocity) {
+			this.spaceship.yvelocity = -32;
+		}
 		
 		this.x += this.xvelocity;
 		this.y += this.yvelocity;

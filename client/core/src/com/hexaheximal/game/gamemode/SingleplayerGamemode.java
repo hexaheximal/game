@@ -151,22 +151,6 @@ public class SingleplayerGamemode extends Gamemode {
 			this.spaceship.y = this.worldSize - this.spaceship.playerTexture.getHeight();
 			this.spaceship.yvelocity = -8.0f;
 		}
-		
-		if (this.spaceship.xvelocity > 32) {
-			this.spaceship.xvelocity = 32;
-		}
-		
-		if (-32 > this.spaceship.xvelocity) {
-			this.spaceship.xvelocity = -32;
-		}
-		
-		if (this.spaceship.yvelocity > 32) {
-			this.spaceship.yvelocity = 32;
-		}
-		
-		if (-32 > this.spaceship.yvelocity) {
-			this.spaceship.yvelocity = -32;
-		}
 
 		List<Laser> laserDeleteQueue = new ArrayList<>();
 
