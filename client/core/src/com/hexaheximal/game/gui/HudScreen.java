@@ -54,7 +54,7 @@ public class HudScreen {
 		Rectangle backwardRect = new Rectangle(this.game.width - (this.backwardTexture.getWidth() + 16), this.game.height - (this.backwardTexture.getHeight() + 16), this.backwardTexture.getWidth(), this.backwardTexture.getHeight());
 
 		if (forwardRect.contains(x, y) || backwardRect.contains(x, y)) {
-			this.game.gamemode.acceleration = 0.0f;
+			this.game.gamemode.spaceship.acceleration = 0.0f;
 			return true;
 		}
 
@@ -79,12 +79,12 @@ public class HudScreen {
 		}
 
 		if (forwardRect.contains(x, y)) {
-			this.game.gamemode.acceleration = 1.0f;
+			this.game.gamemode.spaceship.acceleration = 1.0f;
 			return true;
 		}
 
 		if (backwardRect.contains(x, y)) {
-			this.game.gamemode.acceleration = -1.0f;
+			this.game.gamemode.spaceship.acceleration = -1.0f;
 			return true;
 		}
 

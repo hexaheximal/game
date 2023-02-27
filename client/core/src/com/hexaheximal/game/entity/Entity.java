@@ -10,4 +10,5 @@ public class Entity {
 
 	public void update() {}
 	public void render(SpriteBatch batch) {}
+	public void dispose() {}
 }
