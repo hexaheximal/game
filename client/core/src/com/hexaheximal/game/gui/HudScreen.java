@@ -17,7 +17,7 @@ public class HudScreen {
 
 	public HudScreen(Game game) {
 		this.game = game;
-		//this.font = new Font("Roboto-Regular.ttf", 64);
+		this.font = new Font("Roboto-Regular.ttf", 64);
 
 		this.pauseTexture = new Texture("pause.png");
 		this.resetTexture = new Texture("reset.png");
@@ -30,14 +30,18 @@ public class HudScreen {
 
 		batch.setProjectionMatrix(this.game.guiCamera.combined);
 
-		// Render the HUD icons
+		// Render the HUD
 
-		//this.font.render(batch, this.game.width / 2, this.game.height / 2, "Hello, World!", true);
+		this.font.render(batch, this.game.width / 2, 128, "Health: " + String.valueOf((this.game.gamemode.spaceship.health / this.game.gamemode.spaceship.maxHealth) * 100.0) + "%", true);
 
-		batch.draw(this.pauseTexture, 16, this.game.height - (this.pauseTexture.getHeight() + 16));
-		batch.draw(this.resetTexture, 16 + this.pauseTexture.getWidth() + 16, this.game.height - (this.resetTexture.getHeight() + 16));
-		batch.draw(this.forwardTexture, 16, 16);
-		batch.draw(this.backwardTexture, this.game.width - (this.backwardTexture.getHeight() + 16), 16);
+		if (this.game.isMobile) {
+			batch.draw(this.pauseTexture, 16, this.game.height - (this.pauseTexture.getHeight() + 16));
+			batch.draw(this.resetTexture, 16 + this.pauseTexture.getWidth() + 16, this.game.height - (this.resetTexture.getHeight() + 16));
+			batch.draw(this.forwardTexture, 16, 16);
+			batch.draw(this.backwardTexture, this.game.width - (this.backwardTexture.getHeight() + 16), 16);
+		}
+
+		System.out.println(this.game.gamemode.spaceship.health);
 	}
 
 	public void dispose() {
@@ -48,6 +52,10 @@ public class HudScreen {
 	}
 
 	public boolean handleTouchUp(int x, int y) {
+		if (!this.game.isMobile) {
+			return false;
+		}
+
 		Rectangle pauseRect = new Rectangle(16, 16, this.resetTexture.getWidth(), this.resetTexture.getHeight());
 		Rectangle resetRect = new Rectangle(16 + this.pauseTexture.getWidth() + 16, 16, this.resetTexture.getWidth(), this.resetTexture.getHeight());
 		Rectangle forwardRect = new Rectangle(16, this.game.height - (this.forwardTexture.getHeight() + 16), this.forwardTexture.getWidth(), this.forwardTexture.getHeight());
@@ -64,6 +72,10 @@ public class HudScreen {
 	}
 
 	public boolean handleTouchDown(int x, int y) {
+		if (!this.game.isMobile) {
+			return false;
+		}
+
 		Rectangle pauseRect = new Rectangle(16, 16, this.resetTexture.getWidth(), this.resetTexture.getHeight());
 		Rectangle resetRect = new Rectangle(16 + this.pauseTexture.getWidth() + 16, 16, this.resetTexture.getWidth(), this.resetTexture.getHeight());
 		Rectangle forwardRect = new Rectangle(16, this.game.height - (this.forwardTexture.getHeight() + 16), this.forwardTexture.getWidth(), this.forwardTexture.getHeight());

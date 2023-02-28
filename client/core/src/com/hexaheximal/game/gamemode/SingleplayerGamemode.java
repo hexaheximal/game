@@ -38,7 +38,7 @@ public class SingleplayerGamemode extends Gamemode {
 	public SingleplayerGamemode(Game game) {
 		super(game);
 
-		this.spaceship = new Spaceship(this.game, 0, 0, 0, "Player");
+		this.spaceship = new Spaceship(this.game, 0, 0, 0, 100, 100, "Player");
 
 		this.starTexture = new Texture("star.png");
 		this.laserTexture = new Texture("laser.png");

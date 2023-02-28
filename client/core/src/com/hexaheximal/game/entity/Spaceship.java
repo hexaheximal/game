@@ -18,11 +18,16 @@ public class Spaceship extends Entity {
 	public Texture playerTexture;
 	public TextureRegion region;
 
-	public Spaceship(Game game, float x, float y, float rotation, String name) {
+	public float health;
+	public float maxHealth;
+
+	public Spaceship(Game game, float x, float y, float rotation, float health, float maxHealth, String name) {
 		this.game = game;
 		this.x = x;
 		this.y = y;
 		this.rotation = rotation;
+		this.health = health;
+		this.maxHealth = maxHealth;
 		this.name = name;
 
 		this.playerTexture = new Texture("spaceship.png");

@@ -97,7 +97,7 @@ public class Game extends ApplicationAdapter implements InputProcessor {
 		
 		this.gamemode.render(this.batch);
 		
-		if (this.hud != null && isMobile) {
+		if (this.hud != null) {
 			this.hud.render(this.batch);
 		}
 		
