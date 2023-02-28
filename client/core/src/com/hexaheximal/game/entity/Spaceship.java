@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.hexaheximal.game.Game;
 
-public class Spaceship {
+public class Spaceship extends Entity {
 	public Game game;
 	public float x;
 	public float y;
