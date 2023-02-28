@@ -17,7 +17,7 @@ public class Font {
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(filename));
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 		parameter.size = this.size;
-		parameter.characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789][_!$%#@|\\/?-+=()*&.;,{}\"´`'<>";
+		parameter.characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789][_!$%#@|/?-+=()*&.:;,{}\"´`'<>";
 		this.font = generator.generateFont(parameter);
 		generator.dispose();
 	}
